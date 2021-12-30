@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Binding</title>
-    <link rel="stylesheet" href="/css/estilo.css">
+    <link rel="stylesheet" href="/css/estilo.css" />
     <script src="/js/vue.min.js"></script>
-</head>
-<body class="exercicio">
-
+  </head>
+  <body class="exercicio">
+    <div id="app">
+      <p>{{link}}</p>
+      <p><a href="{{link}}">total seguranca</a></p>
+      <p><a v-bind:href="link">total 02</a></p>
+      <p><a :href="link">total 3</a></p>
+      <p>
+        <input type="text" v-model="nome" />
+        <span>{{nome}}</span>
+      </p>
+    </div>
     <script>
-        // ...
+      new Vue({
+        el: "#app",
+        data: {
+          nome: "Maria",
+          link: "https://totalseguranca.com",
+        },
+        watch: {
+          nome(novoValor) {
+            console.log(novoValor.toUpperCase());
+          },
+        },
+      });
     </script>
-</body>
+  </body>
 </html>
