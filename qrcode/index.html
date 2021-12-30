@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <script src="js/vue.min.js"></script>
     <script src="js/qrious.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
     <title>Gerador de QRCode</title>
-</head>
+  </head>
 
-<body>
+  <body>
+    <vid id="app">
+      <h1>{{title}}</h1>
+      <input
+        type="text"
+        size="25"
+        placeholder="Digite par gerar..."
+        v-model="text"
+      />
 
+      <div v-if="text" class="output">
+        <img :src="newQrCode" alt="qrcode master" />
+      </div>
+    </vid>
     <script>
-        // ...
+      new Vue({
+        el: "#app",
+        data: {
+          title: "Gerador QrCode",
+          text: "https://www.totalseguranca.com",
+          qrcode: new QRious({ size: 300 }),
+        },
+        computed: {
+          // Gerar um novo qrcode para cada texto inputado
+          newQrCode() {
+            this.qrcode.value = this.text;
+            return this.qrcode.toDataURL();
+          },
+        },
+      });
     </script>
-</body>
-
+  </body>
 </html>
